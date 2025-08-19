@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Classificação de Usuário</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0px;
+        color: #fff;
+      }
+      .container {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        width: 400px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+      }
+      h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+      button {
+        background: linear-gradient(135deg,#4caf50,#2e7d32); /* Degradê verde */
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      button:hover {
+        background: linear-gradient(135deg, #66bb6a, #388e3c);
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+      button:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Classificação de Usuário</h2>
+      <button onclick="classificarUsuario()">Iniciar</button>
+      <p id="resultado"></p>
+    </div>
+
+    <script>
+      function classificarUsuario() {
+        // Pede os dados ao usuário
+        let idade = prompt("Digite sua idade:");
+        let status = prompt("Digite seu status (registrado / não registrado):");
+
+        // Converte a idade para número
+        idade = Number(idade);
+
+        // Operador ternário para classificar maior ou menor de idade
+        let maioridade = idade >= 18 ? "maior de idade" : "menor de idade";
+
+        // Switch para mensagens com base no status
+        let mensagemStatus = "";
+        switch (status.toLowerCase()) {
+          case "registrado":
+            mensagemStatus = "Bem-vindo ao sistema!";
+            break;
+          case "não registrado":
+          case "nao registrado":
+            mensagemStatus = "Por favor, complete seu registro.";
+            break;
+          default:
+            mensagemStatus = "Status desconhecido.";
+        }
+
+        // Operadores lógicos para verificar condições
+        let mensagemAcesso = "";
+        if (idade >= 18 && status.toLowerCase() === "registrado") {
+          mensagemAcesso = "✅ Você tem acesso completo ao sistema.";
+        } else if (idade < 18 || status.toLowerCase() !== "registrado") {
+          mensagemAcesso = "⚠️ Você tem acesso limitado.";
+        }
+
+        // Mostra tudo na tela
+        document.getElementById(
+          "resultado"
+        ).innerHTML = `Você é ${maioridade}.<br>${mensagemStatus}<br>${mensagemAcesso}`;
+      }
+    </script>
+  </body>
+</html>
