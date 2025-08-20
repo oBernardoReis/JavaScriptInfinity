@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Caixa Bancário</title>
+  <style>
+    /* Aquela estilizada para deixar bonito */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin: 10px 0;
+      width: 80%;
+    }
+
+    button {
+      background: #22c55e;
+      color: #fff;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #16a34a;
+      transform: scale(1.05);
+    }
+
+    .resultado {
+      margin-top: 20px;
+      text-align: left;
+      background: #0f172a;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .nota {
+      margin: 5px 0;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 Caixa Bancário</h1>
+  <div class="container">
+    <p>Digite o valor que deseja sacar:</p>
+    <input type="number" id="valor" placeholder="Ex: 120">
+    <br>
+    <button onclick="sacar()">Sacar</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    function sacar() {
+      let valor = parseInt(document.getElementById("valor").value); // pega o valor digitado pelo usuário
+      let resultadoDiv = document.getElementById("resultado");
+      resultadoDiv.innerHTML = ""; // aqui vamos guardar o texto final com as notas
+
+      if (isNaN(valor) || valor <= 0) {
+        resultadoDiv.innerHTML = "<p>⚠️ Digite um valor válido!</p>";
+        return;
+      }
+
+      let notas = [100, 50, 20, 10, 5, 2];
+      let resultado = "";
+
+      for (let nota of notas) {
+        let qtd = Math.floor(valor / nota);
+        valor = valor % nota;
+        resultado += `<p class="nota">${qtd} - notas de ${nota}</p>`;
+      }
+
+      resultadoDiv.innerHTML = resultado;
+    }
+  </script>
+
+  <!-- ENTRADA DE DADOS:
+   Pegamos o número que o usuário digitou no input (id="valor").
+   E parseInt transforma a string em número inteiro. -->
+
+  <!-- LOGICA PARA CALCULAR AS NOTAS:
+   Usamos divisão inteira (Math.floor) para saber quantas notas cabem.
+   Depois usamos o resto da divisão (%) para calcular o valor que sobrou.
+   
+   Exemplo:
+   Se o usuário digitou 120:
+   120 / 100 = 1 → cabe 1 nota de 100.
+   120 % 100 = 20 → sobra 20.
+   20 / 20 = 1 → cabe 1 nota de 20.
+   Sobra 0 → acabou. -->
+
+   <!-- MOSTRANDO NO HTML:
+   Peguei a <div id="resultado"></div> do HTML.
+   Joguei o texto que montamos dentro dela. -->
+</body>
+</html>
