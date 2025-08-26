@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atividade Aula 3</title>
+  </head>
+  <body>
+    <script>
+      // Array para armazenar os dados
+      let nomes = [];
+
+      // Coleta de dados com while(true)
+      while (true) {
+        let entrada = prompt("Digite um nome (ou 'sair' para encerrar):");
+
+        if (entrada === null) {
+          // Caso o usuário cancele o prompt
+          break;
+        }
+
+        if (entrada.toLowerCase() === "sair") {
+          break; // Encerra
+        }
+
+        // Adiciona o valor no array
+        nomes.push(entrada);
+      }
+
+      // Processamento com for: exibindo os dados com índices
+      console.log("=== Lista de Nomes com Índices ===");
+      for (let i = 0; i < nomes.length; i++) {
+        console.log(`${i + 1}: ${nomes[i]}`);
+      }
+
+      // Exibição com for...of: mensagem personalizada
+      console.log("=== Mensagens Personalizadas ===");
+      for (let nome of nomes) {
+        console.log(`Bem-vindo(a), ${nome}!`);
+      }
+
+      alert(
+        "Dados processados! Confira o console para ver os resultados."
+      );
+    </script>
+  </body>
+</html>
