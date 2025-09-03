@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 4</title>
+  </head>
+  <body>
+    <script>
+      // Lista de compras (vazia no início)
+      let listaCompras = [];
+
+      // Função para mostrar a lista
+      function mostrarLista() {
+        if (listaCompras.length === 0) {
+          alert("A lista está vazia!");
+        } else {
+          let texto = "=== Lista de Compras ===\n";
+          for (let i = 0; i < listaCompras.length; i++) {
+            texto += i + " - " + listaCompras[i] + "\n";
+          }
+          alert(texto);
+        }
+      }
+
+      // Programa principal
+      let opcao;
+      do {
+        opcao = prompt(
+          "=== Menu ===\n" +
+            "1 - Adicionar item\n" +
+            "2 - Remover item\n" +
+            "3 - Exibir lista\n" +
+            "4 - Atualizar item\n" +
+            "5 - Sair\n" +
+            "Escolha uma opção:"
+        );
+
+        switch (opcao) {
+          case "1":
+            let item = prompt("Digite o item que deseja adicionar:");
+            if (item) {
+              listaCompras.push(item);
+              alert(item + " foi adicionado!");
+            }
+            break;
+
+          case "2":
+            mostrarLista();
+            let indiceRemover = parseInt(
+              prompt("Digite o índice do item que deseja remover:")
+            );
+            if (
+              !isNaN(indiceRemover) &&
+              indiceRemover >= 0 &&
+              indiceRemover < listaCompras.length
+            ) {
+              let removido = listaCompras.splice(indiceRemover, 1);
+              alert(removido + " foi removido!");
+            } else {
+              alert("Índice inválido!");
+            }
+            break;
+
+          case "3":
+            mostrarLista();
+            break;
+
+          case "4":
+            mostrarLista();
+            let indiceAtualizar = parseInt(
+              prompt("Digite o índice do item que deseja atualizar:")
+            );
+            if (
+              !isNaN(indiceAtualizar) &&
+              indiceAtualizar >= 0 &&
+              indiceAtualizar < listaCompras.length
+            ) {
+              let novoItem = prompt("Digite o novo valor para o item:");
+              if (novoItem) {
+                listaCompras[indiceAtualizar] = novoItem;
+                alert("Item atualizado!");
+              }
+            } else {
+              alert("Índice inválido!");
+            }
+            break;
+
+          case "5":
+            alert("Saindo do programa!");
+            break;
+
+          default:
+            alert("Opção inválida!");
+        }
+      } while (opcao !== "5");
+    </script>
+  </body>
+</html>
