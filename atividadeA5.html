@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 5</title>
+  </head>
+  <body>
+    <script>
+      let tarefas = [];
+
+      while (true) {
+        let opcao = prompt(
+          "O que deseja fazer?\n" +
+            "1 - Adicionar tarefa\n" +
+            "2 - Listar tarefas\n" +
+            "3 - Remover tarefa\n" +
+            "4 - Concluir tarefa\n" +
+            "5 - Sair"
+        );
+
+        if (opcao == "1") {
+          // Adicionar tarefa
+          let tarefa = prompt("Digite a nova tarefa:");
+          tarefas.push(tarefa);
+          alert("Tarefa adicionada com sucesso!");
+        } else if (opcao == "2") {
+          // Listar tarefas
+          let lista = "Suas tarefas:\n";
+          for (let i = 0; i < tarefas.length; i++) {
+            lista += i + " - " + tarefas[i] + "\n";
+          }
+          alert(lista);
+        } else if (opcao == "3") {
+          // Remover tarefa
+          let indice = prompt("Digite o índice da tarefa que deseja remover:");
+          tarefas.splice(indice, 1);
+          alert("Tarefa removida com sucesso!");
+        } else if (opcao == "4") {
+          // Concluir tarefa
+          let indice = prompt("Digite o índice da tarefa que deseja concluir:");
+          tarefas[indice] = "✅ " + tarefas[indice];
+          alert("Tarefa concluída!");
+        } else if (opcao == "5") {
+          alert("Saindo do programa...");
+          break; // sai do loop while
+        } else {
+          alert("Opção inválida, tente de novo!");
+        }
+      }
+    </script>
+  </body>
+</html>
