@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prova Aula 7</title>
+  </head>
+  <body>
+    <script>
+      let nomes = [];
+      let continuar = true;
+
+      while (continuar) {
+        let opcao = prompt(
+          "Escolha uma opção:\n" +
+            "1 - Adicionar nome\n" +
+            "2 - Filtrar nomes\n" +
+            "3 - Buscar um nome\n" +
+            "4 - Transformar nomes em maiúsculas\n" +
+            "5 - Verificar se todos têm mais de 3 caracteres\n" +
+            "6 - Sair"
+        );
+
+        switch (opcao) {
+          case "1": // Adicionar nomes
+            let novoNome = prompt("Digite o nome que deseja adicionar:");
+            nomes.push(novoNome);
+            console.log("Lista atualizada:", nomes);
+            break;
+
+          case "2": // Filtrar nomes
+            let letra = prompt("Digite a letra inicial para filtrar:");
+            let filtrados = nomes.filter((nome) => nome.startsWith(letra));
+            console.log("Nomes filtrados:", filtrados);
+            break;
+
+          case "3": // Buscar um nome específico
+            let buscar = prompt("Digite o nome que deseja buscar:");
+            let encontrado = nomes.find((nome) => nome === buscar);
+            if (encontrado) {
+              console.log("Nome encontrado:", encontrado);
+            } else {
+              console.log("Nome não encontrado.");
+            }
+            break;
+
+          case "4": // Transformar nomes
+            let maiusculos = nomes.map((nome) => nome.toUpperCase());
+            console.log("Nomes em maiúsculas:", maiusculos);
+            break;
+
+          case "5": // Verificar condição
+            let todosValidos = nomes.every((nome) => nome.length > 3);
+            console.log(
+              "Todos os nomes têm mais de 3 caracteres?",
+              todosValidos
+            );
+            break;
+
+          case "6": // Sair
+            continuar = false;
+            console.log("Programa encerrado.");
+            break;
+
+          default:
+            console.log("Opção inválida, tente novamente.");
+        }
+      }
+    </script>
+  </body>
+</html>
