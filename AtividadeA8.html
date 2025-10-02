@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aula 8</title>
+  </head>
+  <body>
+    <script>
+      const aluno = {
+        nome: "Ana", // propriedade string
+        notas: [8, 7, 9], // propriedade array de números
+
+        // Método para calcular média das notas
+        calcularMedia: function () {
+          let soma = this.notas.reduce((acc, nota) => acc + nota, 0);
+          return soma / this.notas.length;
+        },
+      };
+
+      const { nome } = aluno;
+      console.log("Nome do aluno:", nome);
+
+      console.log("Média do aluno:", aluno.calcularMedia());
+
+      const novasNotas = [...aluno.notas, 10];
+      console.log("Notas atualizadas:", novasNotas);
+    </script>
+  </body>
+</html>
