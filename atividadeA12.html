@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciador de Notas</title>
+  </head>
+  <body>
+    <h1>Gerenciador de Notas</h1>
+
+    <input type="text" id="tituloNota" placeholder="Digite o título da nota" />
+    <button onclick="adicionarNota()">Adicionar Nota</button>
+
+    <h2>Minhas Notas:</h2>
+    <ul id="listaNotas"></ul>
+
+    <script>
+      function mostrarNotas() {
+        var lista = document.getElementById("listaNotas");
+        lista.innerHTML = "";
+
+        var notasSalvas = localStorage.getItem("notas");
+
+        if (notasSalvas) {
+          var notas = notasSalvas.split(",");
+
+          for (var i = 0; i < notas.length; i++) {
+            var titulo = notas[i];
+
+            var li = document.createElement("li");
+            li.textContent = titulo;
+
+            var botao = document.createElement("button");
+            botao.textContent = "Remover";
+            botao.style.marginLeft = "10px";
+
+            botao.onclick = (function (nota) {
+              return function () {
+                removerNota(nota);
+              };
+            })(titulo);
+
+            li.appendChild(botao);
+            lista.appendChild(li);
+          }
+        }
+      }
+
+      function adicionarNota() {
+        var campo = document.getElementById("tituloNota");
+        var titulo = campo.value.trim();
+
+        if (titulo === "") {
+          alert("Digite um título!");
+          return;
+        }
+
+        var notasSalvas = localStorage.getItem("notas");
+
+        if (notasSalvas && notasSalvas.includes(titulo)) {
+          alert("Essa nota já existe!");
+          return;
+        }
+
+        if (notasSalvas) {
+          notasSalvas = notasSalvas + "," + titulo;
+        } else {
+          notasSalvas = titulo;
+        }
+
+        localStorage.setItem("notas", notasSalvas);
+
+        campo.value = "";
+        mostrarNotas();
+      }
+
+      function removerNota(titulo) {
+        var notasSalvas = localStorage.getItem("notas");
+        if (notasSalvas) {
+          var notas = notasSalvas.split(",");
+          var novasNotas = [];
+
+          for (var i = 0; i < notas.length; i++) {
+            if (notas[i] !== titulo) {
+              novasNotas.push(notas[i]);
+            }
+          }
+
+          localStorage.setItem("notas", novasNotas.join(","));
+          mostrarNotas();
+        }
+      }
+
+      mostrarNotas();
+    </script>
+  </body>
+</html>
