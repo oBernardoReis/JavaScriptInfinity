@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuários</title>
+  <style>
+    .erro {
+      color: red;
+      font-size: 14px;
+    }
+    .sucesso {
+      color: green;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Cadastro de Usuário</h2>
+
+  <form id="formCadastro">
+
+    <label>Nome:</label><br>
+    <input type="text" id="nome"><br>
+    <span class="erro" id="erroNome"></span><br><br>
+
+    <label>Usuário:</label><br>
+    <input type="text" id="usuario"><br>
+    <span class="erro" id="erroUsuario"></span><br><br>
+
+    <label>Senha:</label><br>
+    <input type="password" id="senha"><br>
+    <span class="erro" id="erroSenha"></span><br><br>
+
+    <label>Email:</label><br>
+    <input type="text" id="email"><br>
+    <span class="erro" id="erroEmail"></span><br><br>
+
+    <label>Idade:</label><br>
+    <input type="number" id="idade"><br>
+    <span class="erro" id="erroIdade"></span><br><br>
+
+    <button type="button" id="btnCadastrar">Cadastrar</button>
+
+  </form>
+
+  <div id="mensagemFinal"></div>
+
+  <script>
+    const btn = document.getElementById("btnCadastrar");
+
+    btn.addEventListener("click", function () {
+
+      document.getElementById("erroNome").innerText = "";
+      document.getElementById("erroUsuario").innerText = "";
+      document.getElementById("erroSenha").innerText = "";
+      document.getElementById("erroEmail").innerText = "";
+      document.getElementById("erroIdade").innerText = "";
+      document.getElementById("mensagemFinal").innerHTML = "";
+
+      const nome = document.getElementById("nome").value.trim();
+      const usuario = document.getElementById("usuario").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const idade = parseInt(document.getElementById("idade").value);
+
+      try {
+        if (nome === "") {
+          throw new Error("Nome não pode estar vazio!");
+        }
+
+        if (usuario === "") {
+          throw new Error("Usuário não pode estar vazio!");
+        }
+
+        if (senha.length < 4) {
+          throw new Error("A senha deve ter pelo menos 4 caracteres!");
+        }
+
+        if (!email.includes("@") || !email.includes(".")) {
+          throw new Error("Email inválido!");
+        }
+
+        if (isNaN(idade)) {
+          throw new Error("Idade inválida!");
+        }
+
+        if (idade < 18) {
+          throw new Error("É necessário ter 18 anos ou mais!");
+        }
+
+        document.getElementById("mensagemFinal").innerHTML =
+          `<p class="sucesso">Cadastro realizado com sucesso!</p>`;
+
+      } catch (erro) {
+        if (erro.message.includes("Nome")) {
+          document.getElementById("erroNome").innerText = erro.message;
+        }
+        if (erro.message.includes("Usuário")) {
+          document.getElementById("erroUsuario").innerText = erro.message;
+        }
+        if (erro.message.includes("senha") || erro.message.includes("Senha")) {
+          document.getElementById("erroSenha").innerText = erro.message;
+        }
+        if (erro.message.includes("Email")) {
+          document.getElementById("erroEmail").innerText = erro.message;
+        }
+        if (erro.message.includes("Idade") || erro.message.includes("18")) {
+          document.getElementById("erroIdade").innerText = erro.message;
+        }
+      }
+
+    });
+  </script>
+
+</body>
+</html>

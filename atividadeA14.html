@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Consumindo API</title>
+
+  <style>
+    #resultados div {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
+
+    .erro {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Buscar Usuários da API</h2>
+
+  <button id="btnBuscar">Buscar</button>
+
+  <div id="resultados"></div>
+
+  <script>
+    const botao = document.getElementById("btnBuscar");
+    const areaResultados = document.getElementById("resultados");
+
+    botao.addEventListener("click", async function () {
+      areaResultados.innerHTML = "";
+
+      try {
+        const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!resposta.ok) {
+          throw new Error("API não está respondendo");
+        }
+
+        const dados = await resposta.json();
+
+        dados.forEach(usuario => {
+          const caixa = document.createElement("div");
+
+          caixa.innerHTML = `
+            <p><strong>Nome:</strong> ${usuario.name}</p>
+            <p><strong>Email:</strong> ${usuario.email}</p>
+          `;
+
+          areaResultados.appendChild(caixa);
+        });
+
+      } catch (erro) {
+        const msgErro = document.createElement("p");
+        msgErro.className = "erro";
+        msgErro.textContent = "Erro ao buscar os dados: " + erro.message;
+
+        areaResultados.appendChild(msgErro);
+      }
+    });
+  </script>
+
+</body>
+</html>
